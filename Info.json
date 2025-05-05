@@ -10,9 +10,6 @@
   },
   "entry": "dist/index.js",
   "permissions": ["show-osd", "network-request"],
-  "allowedDomains": [
-    "https://api.aniskip.com/v1/skip-times/**/*",
-    "https://myanimelist.net/search/prefix.json?type=anime&keyword=*"
-  ],
+  "allowedDomains": ["*"],
   "preferenceDefaults": {}
 }

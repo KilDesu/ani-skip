@@ -48,6 +48,7 @@ event.on("mpv.time-pos.changed", () => {
     }
 
     getAnimeTimestamps(animeInfo).then((skipTimes) => {
+      console.log("Skip times found:", skipTimes);
       timestamps = skipTimes;
     });
 
@@ -83,7 +84,11 @@ async function getAnimeTimestamps(
   const skipRes = await http.get(
     `https://api.aniskip.com/v1/skip-times/${malId}/${animeInfo.episode}?types=op&types=ed`,
     {
-      headers: {},
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 6.1; Win64; rv:109.0) Gecko/20100101 Firefox/109.0",
+        "Content-Type": "application/json",
+      },
       params: {},
       data: {},
     }
@@ -123,7 +128,11 @@ async function getMalId(animeName: string) {
   const malRes = await http.get(
     `https://myanimelist.net/search/prefix.json?type=anime&keyword=${animeName}`,
     {
-      headers: {},
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 6.1; Win64; rv:109.0) Gecko/20100101 Firefox/109.0",
+        "Content-Type": "application/json",
+      },
       params: {},
       data: {},
     }
@@ -160,7 +169,6 @@ function getAnimeInfo() {
     return;
   }
 
-  console.log("Media title:", animeNameWithEpisode);
   const [animeName, episodeNumber] = animeNameWithEpisode.split(" Episode ");
 
   if (!animeName) {

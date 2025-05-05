@@ -29,8 +29,32 @@ jobs:
       - name: Tap IINA Homebrew repository
         run: brew tap iina/homebrew-mpv-iina
 
-      - name: Install mpv-iina
-        run: brew install mpv-iina
+      - name: Install mpv-iina with HEAD flag
+        run: brew install --HEAD iina/mpv-iina/mpv-iina
+
+      - name: Create necessary directories
+        run: |
+          mkdir -p deps/include
+          mkdir -p deps/lib
+
+      - name: Copy header files
+        run: |
+          cp -R $(brew --prefix)/include/mpv deps/include/
+          cp -R $(brew --prefix)/include/libavcodec deps/include/
+          cp -R $(brew --prefix)/include/libavformat deps/include/
+          cp -R $(brew --prefix)/include/libavutil deps/include/
+          cp -R $(brew --prefix)/include/libswscale deps/include/
+
+      - name: Run parse_doc.rb script
+        run: |
+          ruby other/parse_doc.rb
+          cp other/MPVOption.swift iina/
+          cp other/MPVCommand.swift iina/
+          cp other/MPVProperty.swift iina/
+
+      - name: Run change_lib_dependencies.rb script
+        run: |
+          ruby other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
 
       - name: Build and Pack Plugin
         run: bun run pack # This runs build and then iina-plugin pack .

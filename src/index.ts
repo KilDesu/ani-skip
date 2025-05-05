@@ -36,10 +36,22 @@ interface AnimeInfo {
 
 const { console, mpv, event, http, core } = iina;
 
-let timestamps: Timestamps | undefined;
+let RETRY_COUNT = 5;
 
-event.on("mpv.time-pos.changed", () => {
+let timestamps: Timestamps | undefined;
+let isWorking = false;
+
+const eventId = event.on("mpv.time-pos.changed", () => {
+  if (isWorking) {
+    return;
+  }
+
   if (!timestamps) {
+    if (RETRY_COUNT-- === 0) {
+      event.off("mpv.time-pos.changed", eventId);
+      return;
+    }
+
     const animeInfo = getAnimeInfo();
 
     if (!animeInfo) {
@@ -48,8 +60,15 @@ event.on("mpv.time-pos.changed", () => {
     }
 
     getAnimeTimestamps(animeInfo).then((skipTimes) => {
+      if (!skipTimes) {
+        notify("No skip times found.");
+        event.off("mpv.time-pos.changed", eventId);
+        return;
+      }
+
       console.log("Skip times found:", skipTimes);
       timestamps = skipTimes;
+      isWorking = false;
     });
 
     return;
@@ -79,6 +98,7 @@ function trySkip(type: "op" | "ed", timePos: number) {
 async function getAnimeTimestamps(
   animeInfo: AnimeInfo
 ): Promise<Timestamps | undefined> {
+  isWorking = true;
   const malId = await getMalId(animeInfo.name);
 
   const skipRes = await http.get(
@@ -97,7 +117,6 @@ async function getAnimeTimestamps(
   const data = skipRes.data as SkipTimesData;
 
   if (!data || !data.found) {
-    console.warn("No skip times found for this anime.");
     return;
   }
 

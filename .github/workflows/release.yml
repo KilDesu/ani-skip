@@ -32,6 +32,9 @@ jobs:
       - name: Install deps
         run: brew install curl grep aria2 ffmpeg git fzf yt-dlp
 
+      - name: Add iina-plugin to PATH
+        run: ln -s /Applications/IINA.app/Contents/MacOS/iina-plugin /usr/local/bin/iina-plugin
+
       - name: Build and Pack Plugin
         run: bun run pack # This runs build and then iina-plugin pack .
 

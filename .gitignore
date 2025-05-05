@@ -1,0 +1,14 @@
+# Created by https://www.toptal.com/developers/gitignore/api/node,macos,vscode+all
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,macos,vscode+all
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+# Packages
+node_modules
+package-lock.json
+bun.lock
+# Dist
+dist
+ani-skip.iinaplgz

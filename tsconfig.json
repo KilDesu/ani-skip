@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["es6", "es7", "esnext"],
+    "sourceMap": false,
+    "target": "ESNext",
+    "module": "ESNext",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/iina-plugin-definition"
+    ],
+    "outDir": "./dist"
+  },
+  "compileOnSave": false,
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

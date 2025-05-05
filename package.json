@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "pack": "bun run build && iina-plugin pack ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/bun": "^1.2.12",
+    "iina-plugin-definition": "^0.99.2"
+  }
+}

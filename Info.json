@@ -1,0 +1,18 @@
+{
+  "name": "ani-skip",
+  "identifier": "com.ani-skip.iina-plugin-template",
+  "version": "1.0.0",
+  "description": "Allows you to automatically skip the opening and ending of anime episodes on iina as you would with ani-skip on MPV.",
+  "author": {
+    "name": "KilDesu",
+    "email": "91275372+KilDesu@users.noreply.github.com",
+    "url": "https://github.com/KilDesu"
+  },
+  "entry": "dist/index.js",
+  "permissions": ["show-osd", "network-request"],
+  "allowedDomains": [
+    "https://api.aniskip.com/v1/skip-times/**/*",
+    "https://myanimelist.net/search/prefix.json?type=anime&keyword=*"
+  ],
+  "preferenceDefaults": {}
+}

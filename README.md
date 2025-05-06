@@ -21,7 +21,7 @@ This plugin fetches skip timestamps from [AniSkip](https://aniskip.com/) based o
    If it was open during the process, IINA will need to be restarted for the changes to be applied.
 
 3. **Download the Plugin:**
-   Download the latest `ani-skip.iinaplgz` file from the [Releases page](https://github.com/KilDesu/iina-ani-skip/releases).
+   Download the latest `ani-skip.iinaplgz` file from the [Releases page](https://github.com/KilDesu/ani-skip/releases/tag/latest).
 
 4. **Install the Plugin:**
 

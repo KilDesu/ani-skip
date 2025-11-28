@@ -2,7 +2,7 @@
 
 Automatically skip anime openings (OP) and endings (ED) in [IINA](https://iina.io/), the modern media player for macOS (often considered a drop-in equivalent of MPV).
 
-This plugin fetches skip timestamps from [AniSkip](https://aniskip.com/) based on the filename, which typically works well with files downloaded using tools like [ani-cli](https://github.com/pystardust/ani-cli).
+This plugin fetches skip timestamps from [ani-skip](https://github.com/synacktraa/ani-skip) based on the filename, which typically works well with files downloaded using tools like [ani-cli](https://github.com/pystardust/ani-cli).
 
 ## Installation
 
